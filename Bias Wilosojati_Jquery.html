@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jquery Task</title>
+</head>
+<body>
+	<!-- <form> -->
+		<label>Name :</label>
+		<input type="text" name="name" id="name"><br>
+		<label>Email :</label>
+		<input type="text" name="email" id="email"><br>
+		<button value="Save" onclick="save()" id="save">Save</button>
+		<button value="Remove" id="remove" onclick="remove()">Remove</button>
+        <p id="alert_text" style="color: red; display: none;">This field is required</p>
+	<!-- </form> -->
+
+	<table border="1px" width="500px">	
+			<thead>	
+					<th>Name</th>
+					<th>Email</th>
+			</thead>
+			<tbody>	
+			</tbody>
+	</table>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	function save(){
+		let name = $('#name').val();
+		let email = $('#email').val();
+    	let alertText = $("#alert_text");
+
+        if(name == "" || email == ""){
+            alertText.slideDown(1000);
+            alertText.slideUp(2000);
+        } else {
+            $("#alert").slideDown(2000);
+        }
+
+        if (name != "" && email != "") {
+			$("tbody").append("<tr id="+name+"_"+email+"><td>"+name+"</td><td>"+email+"</td></tr>");
+        }
+	}
+
+	function remove(){
+		let name = $('#name').val();
+		let email = $('#email').val();
+		let id = $("#"+name+"_"+email).attr("id");
+		
+		if (id) {
+			$("#"+name+"_"+email).remove();
+		} else {
+			alert("name or email not match")
+		}
+	}
+</script>
